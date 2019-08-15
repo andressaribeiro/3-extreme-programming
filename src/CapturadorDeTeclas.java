@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 
 public class CapturadorDeTeclas {
 
+	transient private static int position;
+
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		JButton button = new JButton();
@@ -15,9 +17,37 @@ public class CapturadorDeTeclas {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				System.out.println(e.getKeyCode());
+				position = position + (e.getKeyCode() == 37
+						? -1
+						: 1);
 			}
 		});
+
+		loop();
+	}
+
+	private static void loop() {
+		while (true) {
+			System.out.println("\n\n\n\n");
+			System.out.println(line());
+			waitABit();
+		}
+	}
+
+	private static String line() {
+		String result = "";
+		for (int i = 0; i < position; i++) {
+			result += " ";
+		}
+		return result + "@";
+	}
+
+	private static void waitABit() {
+		try {
+			Thread.sleep(300);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
