@@ -35,11 +35,11 @@ public class CapturadorDeTeclas {
 	}
 
 	private static String line() {
-		String result = "";
+		StringBuilder result = new StringBuilder();
 		for (int i = 0; i < position; i++) {
-			result += " ";
+			result.append(" ");
 		}
-		return result + "@";
+		return result.append("@").toString();
 	}
 
 	private static void waitABit() {
